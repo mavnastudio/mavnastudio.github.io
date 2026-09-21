@@ -1,205 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cast — Shadow Brain Puzzle | Google Play</title>
-    
-    <!-- Fallback meta refresh -->
-    <meta http-equiv="refresh" content="2; url=https://play.google.com/store/apps/details?id=com.mavnastudio.castshadow">
-
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #38bdf8;
-            --primary-hover: #0284c7;
-            --border: rgba(255, 255, 255, 0.08);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 420px;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 40px 32px;
-            text-align: center;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .app-icon {
-            width: 76px;
-            height: 76px;
-            background: linear-gradient(135deg, #1e3a8a, #0284c7 60%, #38bdf8);
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.35);
-        }
-
-        .app-icon svg {
-            width: 40px;
-            height: 40px;
-            stroke: #ffffff;
-            stroke-width: 2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        h1 {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 6px;
-        }
-
-        .sub-name {
-            font-size: 14px;
-            color: var(--primary);
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-
-        p {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 30px;
-        }
-
-        .spinner-wrapper {
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .spinner {
-            width: 28px;
-            height: 28px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 14px 20px;
-            background-color: var(--primary);
-            color: #0f172a;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 14px;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-        }
-
-        .btn svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-hover);
-            color: #ffffff;
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .footer {
-            margin-top: 22px;
-            font-size: 12px;
-            color: var(--text-muted);
-            opacity: 0.75;
-        }
-    </style>
-
-    <script type="text/javascript">
-        const TARGET_URL = "https://play.google.com/store/apps/details?id=com.mavnastudio.castshadow";
-
-        // Smooth redirect after brief delay without polluting history stack
-        setTimeout(() => {
-            window.location.replace(TARGET_URL);
-        }, 1200);
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Cast — Shadow Brain Puzzle</title>
+<script>
+/* Kampanya bilgisini Play'e taşır.
+   Bio bağlantısı örnekleri:
+     /cast-shadow/?s=instagram
+     /cast-shadow/?utm_source=tiktok&utm_medium=organic&utm_campaign=tur1
+   Parametre yoksa çıplak mağaza adresine gider (organik). */
+(function () {
+  var BASE = "https://play.google.com/store/apps/details?id=com.mavnastudio.castshadow";
+  var q = new URLSearchParams(location.search);
+  var src = q.get("utm_source") || q.get("s");
+  var target = BASE;
+  if (src) {
+    var parts = [
+      "utm_source=" + src,
+      "utm_medium=" + (q.get("utm_medium") || "organic"),
+      "utm_campaign=" + (q.get("utm_campaign") || "tur1")
+    ];
+    if (q.get("utm_content")) parts.push("utm_content=" + q.get("utm_content"));
+    if (q.get("utm_term"))    parts.push("utm_term=" + q.get("utm_term"));
+    target = BASE + "&referrer=" + encodeURIComponent(parts.join("&"));
+  }
+  window.__CAST_TARGET = target;
+  location.replace(target);          /* gecikme yok */
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=https://play.google.com/store/apps/details?id=com.mavnastudio.castshadow"></noscript>
+<style>
+  :root { --bg:#070b16; --card:#0f1526; --text:#f2ede4; --muted:#9aa3b8; --warm:#e9b877; --line:rgba(255,255,255,.08); }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:radial-gradient(120% 80% at 50% 110%,#2a2014 0%,var(--bg) 60%);color:var(--text);
+       min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+       font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .card{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line);border-radius:24px;
+        padding:40px 28px;text-align:center}
+  .icon{width:88px;height:88px;border-radius:22px;display:block;margin:0 auto 22px;
+        box-shadow:0 12px 30px -8px rgba(233,184,119,.35)}
+  h1{font-size:21px;font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:28px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px 20px;
+       background:var(--warm);color:#1a1208;font-size:15px;font-weight:650;text-decoration:none;border-radius:14px}
+  .btn:active{transform:scale(.98)}
+  .btn svg{width:18px;height:18px;fill:currentColor}
+</style>
 </head>
 <body>
-
-    <div class="container">
-        <!-- 3D Shadow Cube Icon -->
-        <div class="app-icon">
-            <svg viewBox="0 0 24 24">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-            </svg>
-        </div>
-
-        <h1>Opening Cast</h1>
-        <div class="sub-name">Düş — Gölge ve Zeka Oyunu</div>
-        <p>Redirecting you to Google Play.<br>This will only take a moment.</p>
-
-        <!-- Loading Spinner -->
-        <div class="spinner-wrapper">
-            <div class="spinner"></div>
-        </div>
-
-        <!-- Manual Action Button -->
-        <a id="redirect-btn" href="https://play.google.com/store/apps/details?id=com.mavnastudio.castshadow" class="btn">
-            <svg viewBox="0 0 24 24">
-                <path d="M3.609 1.814L13.792 12 3.61 22.186a2.03 2.03 0 0 1-.22-.924V2.738c0-.34.08-.654.22-.924zm11.602 11.604L6.963 21.666l10.155-5.864-1.907-2.384zm0-2.836l1.907-2.384L6.963 2.334l8.248 8.248zM18.17 11.23l2.84 1.64c.732.423.732 1.117 0 1.54l-2.84 1.64-2.146-2.41 2.146-2.41z"/>
-            </svg>
-            Open in Google Play
-        </a>
-
-        <div class="footer">
-            Tap the button if you are not redirected automatically
-        </div>
-    </div>
-
-    <script>
-        // Sync button target with JS target URL
-        document.getElementById('redirect-btn').href = TARGET_URL;
-    </script>
+  <main class="card">
+    <img class="icon" alt="Cast app icon" width="88" height="88" src="data:image/png;base64,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">
+    <h1>Cast — Shadow Brain Puzzle</h1>
+    <p class="sub">Düş — Gölge ve Zeka Oyunu</p>
+    <a id="go" class="btn" href="https://play.google.com/store/apps/details?id=com.mavnastudio.castshadow">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.03 2.03 0 0 1-.22-.924V2.738c0-.34.08-.654.22-.924zm11.602 11.604L6.963 21.666l10.155-5.864-1.907-2.384zm0-2.836l1.907-2.384L6.963 2.334l8.248 8.248zM18.17 11.23l2.84 1.64c.732.423.732 1.117 0 1.54l-2.84 1.64-2.146-2.41 2.146-2.41z"/></svg>
+      Get it on Google Play
+    </a>
+  </main>
+<script>
+  /* Uygulama içi tarayıcı otomatik yönlendirmeyi engellerse düğme de aynı adrese gider */
+  if (window.__CAST_TARGET) document.getElementById("go").href = window.__CAST_TARGET;
+</script>
 </body>
 </html>
